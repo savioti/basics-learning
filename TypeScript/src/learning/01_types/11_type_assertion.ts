@@ -27,3 +27,14 @@ if (typeof someValue === "string") {
 } else {
     console.log("someValue is not a string, cannot get length.");
 }
+
+// Non-null assertion operator
+let nullableString: string | null = "Hello, TypeScript!";
+let nonNullLength: number = nullableString!.length;
+console.log(`Length of non-null string: ${nonNullLength}`);
+
+nullableString = null;
+// The following line would cause a runtime error if uncommented,
+// because we are asserting that nullableString is not null when it actually is.
+// let nonNullLength2: number = nullableString!.length;
+// console.log(`Length of non-null string (when null): ${nonNullLength2}`);
