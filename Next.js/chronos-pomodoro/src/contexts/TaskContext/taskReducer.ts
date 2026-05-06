@@ -38,6 +38,30 @@ export function taskReducer(
 
                     return task;
                 }),};
+    case TaskActionType.RESET_STATE:
+        return state;
+    case TaskActionType.COUNT_DOWN:
+        return {
+            ...state,
+            secondsRemaining: action.payload.secondsRemaining,
+            formattedSecondsRemaining: exportSecondsToMinutes(action.payload.secondsRemaining),
+        };
+    case TaskActionType.COMPLETE_TASK:
+        return {
+                ...state,
+                activeTask: null,
+                secondsRemaining: 0,
+                formattedSecondsRemaining: '00:00',
+                tasks: state.tasks.map((task) => {
+                    if (task.id === state.activeTask?.id) {
+                        return {
+                            ...task,
+                            completedDate: Date.now(),
+                        };
+                    }
+
+                    return task;
+                }),};
     default:
       return state;
   }
